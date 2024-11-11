@@ -1,7 +1,10 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.platform.commons.util.CollectionUtils;
+
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +19,7 @@ class GsonSerializerTest {
     void setUp() {
         List<Message> messages = new ArrayList<>();
         messages.add(new Message("Hello", "This is the first message", LocalDateTime.now()));
+        messages.add(new Message("Buzzkills in New York", "I hate buzzkills. They're funny tho.", LocalDateTime.of(2022, Month.JANUARY, 4, 0, 0)));
         userProfile = new UserProfile("John", "Doe", "john.doe@example.com", messages);
     }
 
@@ -43,6 +47,7 @@ class GsonSerializerTest {
         // Check other fields
         assertEquals(userProfile.getName(), deserializedUserProfile.getName());
         assertEquals(userProfile.getSurname(), deserializedUserProfile.getSurname());
-        //assertEquals(userProfile.getMessages().size(), deserializedUserProfile.getMessages().size());
+
+        assertEquals(userProfile.getMessages(), deserializedUserProfile.getMessages());
     }
 }

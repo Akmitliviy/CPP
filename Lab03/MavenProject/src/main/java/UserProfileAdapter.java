@@ -4,6 +4,7 @@ import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.JsonWriter;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -25,6 +26,7 @@ public class UserProfileAdapter extends TypeAdapter<UserProfile> {
             out.name("email").nullValue();
         }
         if (userProfile.getMessages() != null) {
+            out.name("messagesCount").value(userProfile.getMessages().size());
             out.name("messages").beginArray();
             for (Message message : userProfile.getMessages()) {
                 out.beginObject();
@@ -50,6 +52,7 @@ public class UserProfileAdapter extends TypeAdapter<UserProfile> {
         String surname = null;
         UUID ID = null;
         List<Message> messages = null;
+        int messagesCount = 0;
 
         while (in.hasNext()) {
             String fieldName = in.nextName();
@@ -63,9 +66,12 @@ public class UserProfileAdapter extends TypeAdapter<UserProfile> {
                 case "surname":
                     surname = in.nextString();
                     break;
-//                case "messages":
-//                    messages = readMessages(in);  // Helper method to read messages array
-//                    break;
+                case "messagesCount":
+                    messagesCount = in.nextInt();
+                    break;
+                case "messages":
+                    messages = readMessages(in, messagesCount);  // Helper method to read messages array
+                    break;
                 default:
                     in.skipValue();  // Skip any fields not handled
                     break;
@@ -76,11 +82,37 @@ public class UserProfileAdapter extends TypeAdapter<UserProfile> {
         return new UserProfile(name, surname, null, messages);  // `email` is not deserialized
     }
 
-    private List<Message> readMessages(JsonReader in) throws IOException {
+    private List<Message> readMessages(JsonReader in, int messagesCount) throws IOException {
         in.beginArray();
         List<Message> messages = new ArrayList<>();
 
+        for (int i = 0; i < messagesCount; i++) {
+            in.beginObject();
+            String topic = null;
+            String message = null;
+            LocalDateTime date = null;
 
-        return null;  // Replace with actual deserialization logic for messages
+            while(topic == null || message == null || date == null) {
+                switch (in.nextName()) {
+                    case "topic":
+                        topic = in.nextString();
+                        break;
+                    case "message":
+                        message = in.nextString();
+                        break;
+                    case "date":
+                        date = LocalDateTime.parse(in.nextString());
+                        break;
+                    default:
+                        in.skipValue();
+                }
+            }
+            in.endObject();
+
+            messages.add(new Message(topic, message, date));
+        }
+        in.endArray();
+
+        return messages;
     }
 }

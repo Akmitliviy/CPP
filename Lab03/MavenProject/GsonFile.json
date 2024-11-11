@@ -1,13 +1,19 @@
 {
-  "ID": "c7c9b0cf-0fda-4e32-950a-93b461ba85bc",
+  "ID": "9eca1542-4540-42a3-b64a-f72c709bb8fd",
   "name": "John",
   "surname": "Doe",
   "email": "john.doe@example.com",
+  "messagesCount": 2,
   "messages": [
     {
       "topic": "Hello",
       "message": "This is the first message",
-      "date": "2024-11-11T02:45:11.458796900"
+      "date": "2024-11-11T03:14:50.380281800"
+    },
+    {
+      "topic": "Buzzkills in New York",
+      "message": "I hate buzzkills. They\u0027re funny tho.",
+      "date": "2022-01-04T00:00"
     }
   ]
 }
