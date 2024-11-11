@@ -1,6 +1,6 @@
+import Entities.*;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.JsonWriter;
 
 import java.io.IOException;
@@ -15,7 +15,7 @@ public class UserProfileAdapter extends TypeAdapter<UserProfile> {
     public void write(JsonWriter out, UserProfile userProfile) throws IOException {
         out.beginObject();
 
-        out.name("ID").value(userProfile.getID().toString());
+        out.name("ID").value(userProfile.getID());
         out.name("name").value(userProfile.getName());
         out.name("surname").value(userProfile.getSurname());
 
@@ -50,7 +50,7 @@ public class UserProfileAdapter extends TypeAdapter<UserProfile> {
 
         String name = null;
         String surname = null;
-        UUID ID = null;
+        String ID = null;
         List<Message> messages = null;
         int messagesCount = 0;
 
@@ -58,7 +58,7 @@ public class UserProfileAdapter extends TypeAdapter<UserProfile> {
             String fieldName = in.nextName();
             switch (fieldName) {
                 case "ID":
-                    ID = UUID.fromString(in.nextString());
+                    ID = in.nextString();
                     break;
                 case "name":
                     name = in.nextString();

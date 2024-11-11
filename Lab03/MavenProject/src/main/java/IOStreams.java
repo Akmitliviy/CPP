@@ -1,3 +1,5 @@
+import Entities.*;
+
 import java.io.*;
 import java.util.List;
 

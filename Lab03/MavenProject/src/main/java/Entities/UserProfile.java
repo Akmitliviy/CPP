@@ -1,5 +1,6 @@
-import com.google.gson.annotations.Expose;
+package Entities;
 
+import com.google.gson.annotations.Expose;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
@@ -7,43 +8,63 @@ import java.util.UUID;
 public class UserProfile implements Serializable {
     private static final long serialVersionUID = 1L;
     @Expose
-    private final UUID ID = UUID.randomUUID();
+    private String ID = UUID.randomUUID().toString();
     @Expose
     private String name;
     @Expose
     private String surname;
     @Expose
-    private transient String email;
+    private String email;
     @Expose
-    private transient List<Message>  messages;
+    private List<Message>  messages;
 
-    UserProfile(String name, String surname, String email, List<Message> messages) {
+    public UserProfile(String name, String surname, String email, List<Message> messages) {
         this.name = name;
         this.surname = surname;
         this.email = email;
         this.messages = messages;
     }
 
-    public UUID getID() {
+    public UserProfile() {}
+
+    public String getID() {
         return ID;
+    }
+    public void setID(String ID) {
+        this.ID = ID;
     }
 
     public String getName() {
         return name;
     }
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getSurname() {
         return surname;
     }
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
     public String getEmail() {
         return email;
     }
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public List<Message> getMessages() {
         return messages;
+    }
+    public void setMessages(List<Message> messages) {
+        this.messages = messages;
     }
 
     @Override
     public String toString() {
-        return "UserProfile{" +
+        return "Entities.UserProfile{" +
                 "ID=" + ID +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +

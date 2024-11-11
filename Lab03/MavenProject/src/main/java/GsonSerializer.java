@@ -1,3 +1,4 @@
+import Entities.UserProfile;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.io.FileReader;
@@ -14,14 +15,20 @@ public class GsonSerializer {
             .create();
 
     public static <T> void serialize(T object, String filePath) throws IOException {
-        try (Writer writer = new FileWriter(filePath)) {
+        Writer writer = new FileWriter(filePath);
+        try{
             gson.toJson(object, writer);
+        }finally {
+            writer.close();
         }
     }
 
     public static <T> T deserialize(String filePath, Class<T> clazz) throws IOException {
-        try (Reader reader = new FileReader(filePath)) {
+        Reader reader = new FileReader(filePath);
+        try{
             return gson.fromJson(reader, clazz);
+        }finally {
+            reader.close();
         }
     }
 }

@@ -1,5 +1,6 @@
-import com.google.gson.annotations.Expose;
+package Entities;
 
+import com.google.gson.annotations.Expose;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -20,16 +21,27 @@ public class Message implements Serializable {
         this.date = date;
     }
 
+    public Message(){}
+
     public String getTopic() {
         return topic;
+    }
+    public void setTopic(String topic) {
+        this.topic = topic;
     }
 
     public String getMessage() {
         return message;
     }
+    public void setMessage(String message) {
+        this.message = message;
+    }
 
     public LocalDateTime getDate() {
         return date;
+    }
+    public void setDate(LocalDateTime date) {
+        this.date = date;
     }
 
     @Override

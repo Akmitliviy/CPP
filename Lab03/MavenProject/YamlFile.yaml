@@ -1,0 +1,8 @@
+ID: 3d97d2c7-5af0-4467-baf7-dd92220e1e9f
+email: john.doe@example.com
+messages:
+- date: {}
+  message: This is the first message
+  topic: Hello
+name: John
+surname: Doe
