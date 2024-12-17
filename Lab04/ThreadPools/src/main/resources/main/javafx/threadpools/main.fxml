@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+
+<VBox spacing="10" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="main.javafx.threadpools.MainController">
+    <HBox spacing="10">
+        <Label text="Кількість потоків:" />
+        <TextField fx:id="threadCountField" promptText="Введіть кількість потоків" />
+        <Button text="Запустити" onAction="#startProcessing" />
+    </HBox>
+    <Label text="Стан Завдань:" />
+    <ScrollPane fx:id="threadsPane" prefHeight="300" prefWidth="600">
+        <VBox fx:id="threadsBox" spacing="10" />
+    </ScrollPane>
+    <Label text="Результати:" />
+    <TextArea fx:id="resultArea" prefHeight="200" editable="false" />
+</VBox>
+
